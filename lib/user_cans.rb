@@ -13,7 +13,15 @@ module Can
 
     class Configuration
 
-      attr_accessor :cans_klass
+      attr_writer :cans_klass
+
+      def camelize(str)
+        str.split('_').map {|w| w.capitalize}.join
+      end
+
+      def cans_klass
+        Object.const_get(camelize(@cans_klass.to_s))
+      end
 
       def initialize
         @cans_klass = :user_cans
