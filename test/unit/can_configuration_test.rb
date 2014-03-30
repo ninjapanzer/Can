@@ -12,6 +12,13 @@ describe "Configuration" do
   it "should return a default object" do
     config = Can::UserCans.configure
     expect(config.cans_klass).to eq(Can::UserCans)
+    expect(config.unauthorized_path).to eq('/')
+  end
+
+  it "should return the configured unauth path" do
+  end
+
+  it "should return the configured cans class const" do
   end
 
 end

@@ -38,6 +38,18 @@ class InaccessibleControllerStub
   end
 
   def can? fake
-    true
+    false
+  end
+
+  def flash
+    {}
+  end
+
+  def root_path
+    "path"
+  end
+
+  def redirect_to thing
+    thing
   end
 end

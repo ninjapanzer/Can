@@ -15,6 +15,7 @@ module Can
 
     class Configuration
 
+      attr_accessor :unauthorized_path
       attr_writer :cans_klass
 
       def cans_klass
@@ -23,6 +24,7 @@ module Can
 
       def initialize
         @cans_klass = "Can::UserCans"
+        @unauthorized_path = '/'
       end
 
     end

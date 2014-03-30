@@ -11,7 +11,7 @@ module Can
       allow = cans.can? klass_name.to_sym
 
       if !allow
-        flash[:notice] = "You are not authorized to access #{class_name.capitalize}"
+        flash[:notice] = "You are not authorized to access #{klass_name.capitalize}"
         redirect_to root_path
       end
     end
