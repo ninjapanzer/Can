@@ -1,4 +1,5 @@
-require "user_cans.rb"
+require_relative "can.rb"
+
 module Can
   module UserCans
 
