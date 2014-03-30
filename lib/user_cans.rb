@@ -1,10 +1,36 @@
-module UserCans
-  def self.find_for user
+module Can
+  module UserCans
+
+    class << self
+      attr_accessor :configuration
+    end
+
+    def self.configure
+      self.configuration ||= Configuration.new
+      yield(configuration)
+    end
+
+    class Configuration
+
+      attr_accessor :cans_klass
+
+      def initialize
+        @cans_klass = :user_cans
+      end
+
+    end
+
+    class Default
+      include Can
+    end
+
+  def find_for user
     role_class = user.role.gsub(' ', '_').classify
     return UserCans.const_get(role_class) if UserCans.const_defined? role_class
   end
 end
-
+end
+=begin
 class UserCans
   def self.find_for user
     role_class = user.role.gsub(' ', '_').classify
@@ -30,3 +56,4 @@ class UserCans
     can :review
   end
 end
+=end
