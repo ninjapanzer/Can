@@ -1,3 +1,10 @@
+module UserCans
+  def self.find_for user
+    role_class = user.role.gsub(' ', '_').classify
+    return UserCans.const_get(role_class) if UserCans.const_defined? role_class
+  end
+end
+
 class UserCans
   def self.find_for user
     role_class = user.role.gsub(' ', '_').classify
