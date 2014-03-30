@@ -24,11 +24,11 @@ module Can
       include Can
     end
 
-  def find_for user
-    role_class = user.role.gsub(' ', '_').classify
-    return UserCans.const_get(role_class) if UserCans.const_defined? role_class
+    def find_for user
+      role_class = user.role.gsub(' ', '_').classify
+      return UserCans.const_get(role_class) if UserCans.const_defined? role_class
+    end
   end
-end
 end
 =begin
 class UserCans
