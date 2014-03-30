@@ -1,3 +1,4 @@
+require "user_cans.rb"
 module Can
   module UserCans
 
@@ -15,16 +16,12 @@ module Can
 
       attr_writer :cans_klass
 
-      def camelize(str)
-        str.split('_').map {|w| w.capitalize}.join
-      end
-
       def cans_klass
-        Object.const_get(camelize(@cans_klass.to_s))
+        Object.const_get(@cans_klass.to_s)
       end
 
       def initialize
-        @cans_klass = :user_cans
+        @cans_klass = "Can::UserCans"
       end
 
     end
