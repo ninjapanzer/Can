@@ -1,4 +1,5 @@
---default-path test
+--default-path ./test
+--pattern **/*test.rb
 --format d
 --color
 --require ./test/helpers/spec_helper.rb

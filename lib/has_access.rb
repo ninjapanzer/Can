@@ -1,5 +1,3 @@
-require_relative "user_cans.rb"
-
 module Can
   module HasAccess
 
@@ -7,7 +5,7 @@ module Can
       klass_name = self.class.to_s.downcase.gsub('controller','')
       cans_obj = UserCans.configure.cans_klass
       cans = cans_obj.const_get("Default")
-      cans = UserCans.find_for current_user unless current_user.nil?
+      cans = cans_obj.find_for current_user unless current_user.nil?
       allow = cans.can? klass_name.to_sym
 
       if !allow
