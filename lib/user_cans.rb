@@ -1,7 +1,7 @@
-require_relative "can.rb"
+require "can"
 
 module Can
-  module UserCans
+  class UserCans
 
     class << self
       attr_accessor :configuration
@@ -33,9 +33,11 @@ module Can
       include Can
     end
 
-    def find_for user
+    def self.find_for user
       role_class = user.role.gsub(' ', '_').classify
-      return UserCans.const_get(role_class) if UserCans.const_defined? role_class
+      binding.pry
+      return configure.cans_klass.const_get(role_class) if configure.cans_klass.const_defined? role_class
+      configure.cans_klass.const_get('Default')
     end
   end
 end

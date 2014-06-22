@@ -1,44 +1,10 @@
-module Can
-  module UserCans
-    
-    def self.configure
-      ConfigurationStub.new
-    end
-
-    def self.find_for fake
-      fake
-    end
-    
-    class ConfigurationStub
-      
-      def cans_klass
-        UserCans
-      end
-
-      class Default; end
-    end
-  end
-end
-
-class AccessibleControllerStub
-  include Can::HasAccess
+module AuthStubs
   def current_user
     self
   end
 
-  def can? fake
-    true
-  end
-end
-
-class InaccessibleControllerStub
-  include Can::HasAccess
-  def current_user
-    self
-  end
-
-  def can? fake
-    false
+  def role
+    self.class.to_s
   end
 
   def flash
@@ -52,4 +18,16 @@ class InaccessibleControllerStub
   def redirect_to thing
     thing
   end
+end
+
+class AccessibleControllerStub
+  include Can::HasAccess
+  include AuthStubs
+  
+  def route; end
+end
+
+class InaccessibleControllerStub
+  include Can::HasAccess
+  include AuthStubs
 end

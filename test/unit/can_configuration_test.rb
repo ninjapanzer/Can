@@ -1,9 +1,8 @@
 require 'user_cans'
-require 'default_user_cans'
-
-module UserRoles; class Wunderbar; end; end
 
 class CanConfigurationTest
+
+  class FakeRoles; class Wunderbar; end; end
 
   describe "Configuration" do
 
@@ -16,9 +15,8 @@ class CanConfigurationTest
     end
 
     it "should return a default object" do
-      binding.pry
       config = Can::UserCans.configure
-      expect(config.cans_klass).to eq(Can::DefaultUserCans)
+      expect(config.cans_klass).to eq(Can::UserCans)
       expect(config.unauthorized_path).to eq('/')
     end
 
@@ -31,9 +29,9 @@ class CanConfigurationTest
 
     it "should return the configured cans class const" do
       Can::UserCans.configure do |config|
-        config.cans_klass = :"UserRoles::Wunderbar"
+        config.cans_klass = :"CanConfigurationTest::FakeRoles::Wunderbar"
       end
-      expect(Can::UserCans.configure.cans_klass).to eq(UserRoles::Wunderbar)
+      expect(Can::UserCans.configure.cans_klass).to eq(CanConfigurationTest::FakeRoles::Wunderbar)
     end
 
   end
